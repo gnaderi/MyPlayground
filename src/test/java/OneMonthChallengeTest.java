@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,5 +39,13 @@ class OneMonthChallengeTest {
         assertEquals(7, oneMonthChallenge.maxProfit(new int[]{7,1,5,3,6,4}));
         assertEquals(4, oneMonthChallenge.maxProfit(new int[]{1, 2, 3, 4, 5}));
         assertEquals(0, oneMonthChallenge.maxProfit(new int[]{7, 6, 4, 3, 1}));
+    }
+
+    @Test
+    void groupAnagrams() {
+
+        assertEquals("[[eat, tea, ate], [bat], [tan, nat]]" ,
+                oneMonthChallenge.groupAnagrams(new String[]{"eat","tea","tan","ate","nat","bat"}).toString());
+
     }
 }

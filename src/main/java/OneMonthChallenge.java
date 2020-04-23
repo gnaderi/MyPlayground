@@ -273,14 +273,42 @@ public class OneMonthChallenge {
      * @param strs
      * @return
      */
-    public List<List<String>> groupAnagrams(String[] strs) {
-        Map<Integer, List<String>> map = new HashMap<>();
+    public List<List<String>> groupAnagrams1(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
         for (String str : strs) {
-            List<String> list = map.computeIfAbsent(str.hashCode(), k -> new ArrayList<>());
+            List<String> list = map.computeIfAbsent(calculateHashCode(str), k -> new ArrayList<>());
             list.add(str);
-            map.put(str.hashCode(), list);
+            map.put(calculateHashCode(str), list);
         }
-        List<List<String>> groupByList = map.values().stream().collect(Collectors.toList());
-        return groupByList;
+        return new ArrayList<>(map.values());
     }
+
+    private String calculateHashCode(String str) {
+        if (str == null || str.length() <= 0) {
+            return "";
+        }
+        int[] geneticSequence = new int[26];
+        for (Character ch : str.toCharArray()) {
+            geneticSequence[ch - 'a']++;
+        }
+        StringBuilder sb = new StringBuilder(53);
+        for (int g : geneticSequence) {
+            sb.append(g + '~');
+        }
+        return sb.toString();
+    }
+
+    public List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+        for (String str : strs) {
+            char[] chars = str.toCharArray();
+            Arrays.sort(chars);
+            String key = new String(chars);
+            List<String> list = map.computeIfAbsent(key, k -> new ArrayList<>());
+            list.add(str);
+            map.put(key, list);
+        }
+        return new ArrayList<>(map.values());
+    }
+
 }
