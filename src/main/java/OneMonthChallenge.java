@@ -1,6 +1,4 @@
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class OneMonthChallenge {
     /**
@@ -22,6 +20,7 @@ public class OneMonthChallenge {
      * @param nums
      * @return
      */
+
     public int singleNumber(int[] nums) {
         Map<Integer, Integer> map = new HashMap<>();
         for (int n : nums) {
@@ -309,6 +308,342 @@ public class OneMonthChallenge {
             map.put(key, list);
         }
         return new ArrayList<>(map.values());
+    }
+
+    /**
+     * Counting Elements
+     * Given an integer array arr, count element x such that x + 1 is also in arr.
+     * <p>
+     * If there're duplicates in arr, count them seperately.
+     * <p>
+     * <p>
+     * <p>
+     * Example 1:
+     * <p>
+     * Input: arr = [1,2,3]
+     * Output: 2
+     * Explanation: 1 and 2 are counted cause 2 and 3 are in arr.
+     * Example 2:
+     * <p>
+     * Input: arr = [1,1,3,3,5,5,7,7]
+     * Output: 0
+     * Explanation: No numbers are counted, cause there's no 2, 4, 6, or 8 in arr.
+     * Example 3:
+     * <p>
+     * Input: arr = [1,3,2,3,5,0]
+     * Output: 3
+     * Explanation: 0, 1 and 2 are counted cause 1, 2 and 3 are in arr.
+     * Example 4:
+     * <p>
+     * Input: arr = [1,1,2,2]
+     * Output: 2
+     * Explanation: Two 1s are counted cause 2 is in arr.
+     *
+     * @param arr
+     * @return
+     */
+    public int countElements(int[] arr) {
+        Set<Integer> tempSet = new HashSet<>();
+        for (int value : arr) {
+            tempSet.add(value);
+        }
+        int count = 0;
+        for (int value : arr) {
+            if (tempSet.contains(value + 1)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+
+/**
+ *   Middle of the Linked List
+ * Given a non-empty, singly linked list with head node head, return a middle node of linked list.
+ *
+ * If there are two middle nodes, return the second middle node.
+ *
+ *
+ *
+ * Example 1:
+ *
+ * Input: [1,2,3,4,5]
+ * Output: Node 3 from this list (Serialization: [3,4,5])
+ * The returned node has value 3.  (The judge's serialization of this node is [3,4,5]).
+ * Note that we returned a ListNode object ans, such that:
+ * ans.val = 3, ans.next.val = 4, ans.next.next.val = 5, and ans.next.next.next = NULL.
+ * Example 2:
+ *
+ * Input: [1,2,3,4,5,6]
+ * Output: Node 4 from this list (Serialization: [4,5,6])
+ * Since the list has two middle nodes with values 3 and 4, we return the second one.
+ *
+ *
+ * Note:
+ *
+ * The number of nodes in the given list will be between 1 and 100.
+ */
+    /**
+     * Definition for singly-linked list.
+     */
+    public class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+        }
+    }
+
+    public ListNode middleNode(ListNode head) {
+        ListNode p = head;
+        while (p != null && p.next != null) {
+            p = p.next.next;
+            head = head.next;
+        }
+        return head;
+    }
+
+    /**
+     * Backspace String Compare
+     * Given two strings S and T, return if they are equal when both are typed into empty text editors. # means a backspace character.
+     * <p>
+     * Note that after backspacing an empty text, the text will continue empty.
+     * <p>
+     * Example 1:
+     * <p>
+     * Input: S = "ab#c", T = "ad#c"
+     * Output: true
+     * Explanation: Both S and T become "ac".
+     * Example 2:
+     * <p>
+     * Input: S = "ab##", T = "c#d#"
+     * Output: true
+     * Explanation: Both S and T become "".
+     * Example 3:
+     * <p>
+     * Input: S = "a##c", T = "#a#c"
+     * Output: true
+     * Explanation: Both S and T become "c".
+     * Example 4:
+     * <p>
+     * Input: S = "a#c", T = "b"
+     * Output: false
+     * Explanation: S becomes "c" while T becomes "b".
+     * Note:
+     * <p>
+     * 1 <= S.length <= 200
+     * 1 <= T.length <= 200
+     * S and T only contain lowercase letters and '#' characters.
+     * Follow up:
+     * <p>
+     * Can you solve it in O(N) time and O(1) space?
+     *
+     * @param S
+     * @param T
+     * @return
+     */
+    public boolean backspaceCompare(String S, String T) {
+        return applyBackSpace(S).equalsIgnoreCase(applyBackSpace(T));
+    }
+
+    private String applyBackSpace(String str) {
+        StringBuffer sb = new StringBuffer();
+
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == '#') {
+                if (sb.length() > 0) {
+                    sb.deleteCharAt(sb.length() - 1);
+                }
+            } else {
+                sb.append(str.charAt(i));
+            }
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * Diameter of Binary Tree
+     * Solution
+     * Given a binary tree, you need to compute the length of the diameter of the tree. The diameter of a binary tree is the length of the longest path between any two nodes in a tree. This path may or may not pass through the root.
+     * <p>
+     * Example:
+     * Given a binary tree
+     * 1
+     * / \
+     * 2   3
+     * / \
+     * 4   5
+     * Return 3, which is the length of the path [4,2,1,3] or [5,2,1,3].
+     * <p>
+     * Note: The length of path between two nodes is represented by the number of edges between them.
+     */
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
+
+    public int diameterOfBinaryTree(TreeNode root) {
+        if (root == null)
+            return 0;
+        int lDepth = maxDepth(root.left);
+        int rDepth = maxDepth(root.right);
+        int lDiameter = diameterOfBinaryTree(root.left);
+        int rDiameter = diameterOfBinaryTree(root.right);
+        return Math.max(lDepth + rDepth + 1, Math.max(lDiameter, rDiameter));
+    }
+
+    private int maxDepth(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1 + Math.max(maxDepth(node.left), maxDepth(node.right));
+    }
+
+    /**
+     * We have a collection of stones, each stone has a positive integer weight.
+     * <p>
+     * Each turn, we choose the two heaviest stones and smash them together.  Suppose the stones have weights x and y with x <= y.  The result of this smash is:
+     * <p>
+     * If x == y, both stones are totally destroyed;
+     * If x != y, the stone of weight x is totally destroyed, and the stone of weight y has new weight y-x.
+     * At the end, there is at most 1 stone left.  Return the weight of this stone (or 0 if there are no stones left.)
+     * <p>
+     * <p>
+     * <p>
+     * Example 1:
+     * <p>
+     * Input: [2,7,4,1,8,1]
+     * Output: 1
+     * Explanation:
+     * We combine 7 and 8 to get 1 so the array converts to [2,4,1,1,1] then,
+     * we combine 2 and 4 to get 2 so the array converts to [2,1,1,1] then,
+     * we combine 2 and 1 to get 1 so the array converts to [1,1,1] then,
+     * we combine 1 and 1 to get 0 so the array converts to [1] then that's the value of last stone.
+     * <p>
+     * <p>
+     * Note:
+     * <p>
+     * 1 <= stones.length <= 30
+     * 1 <= stones[i] <= 1000
+     * Hide Hint #1
+     * Simulate the process. We can do it with a heap, or by sorting some list of stones every time we take a turn.
+     *
+     * @param stones
+     * @return
+     */
+    public int lastStoneWeight(int[] stones) {
+        int sl = stones.length;
+        int stoneWeight = 0;
+        while (sl > 1) {
+            Arrays.sort(stones, 0, sl);
+
+            int lastElemIndex = sl - 1;
+            stones[lastElemIndex - 1] = stones[lastElemIndex] - stones[lastElemIndex - 1];
+            sl--;
+        }
+
+        if (stones.length >= 1) {
+            stoneWeight = stones[0];
+        }
+
+        return stoneWeight;
+
+    }
+}
+
+/**
+ * Min Stack
+ * Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+ * <p>
+ * push(x) -- Push element x onto stack.
+ * pop() -- Removes the element on top of the stack.
+ * top() -- Get the top element.
+ * getMin() -- Retrieve the minimum element in the stack.
+ * <p>
+ * <p>
+ * Example 1:
+ * <p>
+ * Input
+ * ["MinStack","push","push","push","getMin","pop","top","getMin"]
+ * [[],[-2],[0],[-3],[],[],[],[]]
+ * <p>
+ * Output
+ * [null,null,null,null,-3,null,0,-2]
+ * <p>
+ * Explanation
+ * MinStack minStack = new MinStack();
+ * minStack.push(-2);
+ * minStack.push(0);
+ * minStack.push(-3);
+ * minStack.getMin(); // return -3
+ * minStack.pop();
+ * minStack.top();    // return 0
+ * minStack.getMin(); // return -2
+ * <p>
+ * <p>
+ * Constraints:
+ * <p>
+ * Methods pop, top and getMin operations will always be called on non-empty stacks.
+ */
+
+class MinStack {
+    Stack<Integer> stack;
+    Stack<Integer> helperStack;
+
+    /**
+     * initialize your data structure here.
+     */
+    public MinStack() {
+        this.stack = new Stack<>();
+        this.helperStack = new Stack<>();
+    }
+
+    public int top() {
+        return stack.peek();
+    }
+
+    public void push(int value) {
+        if (!helperStack.isEmpty()) {
+            if (value < helperStack.peek()) {
+                helperStack.push(value);
+            }
+        } else {
+            helperStack.push(value);
+        }
+        stack.push(value);
+    }
+
+    public void pop() {
+        if (stack.empty()) {
+            return;
+        }
+        if (stack.peek().equals(helperStack.peek())) {
+            helperStack.pop();
+        }
+        stack.pop();
+    }
+
+    public Integer getMin() {
+        if (helperStack.isEmpty()) {
+            return null;
+        }
+        return helperStack.peek();
     }
 
 }
