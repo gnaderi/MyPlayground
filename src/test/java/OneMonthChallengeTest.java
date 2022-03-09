@@ -2,7 +2,6 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -56,15 +55,15 @@ class OneMonthChallengeTest {
         minStack.push(-2);
         minStack.push(0);
         minStack.push(-1);
-        assertEquals(new Integer(-2), minStack.getMin());
+        assertEquals(Integer.valueOf(-2), minStack.getMin());
         assertEquals(-1, minStack.top());
         minStack.pop();
-        assertEquals(new Integer(-2), minStack.getMin()); // return -2
+        assertEquals(Integer.valueOf(-2), minStack.getMin()); // return -2
     }
 
     @Test
     void lastStoneWeight() {
         assertEquals(1, oneMonthChallenge.lastStoneWeight(new int[]{2, 7, 4, 1, 8, 1}));
-        System.out.println("new LocalDateTime() = " +  LocalDateTime.parse("1985-01-12T11:20:54.000"));
+        System.out.println("new LocalDateTime() = " + LocalDateTime.parse("1985-01-12T11:20:54.000"));
     }
 }
