@@ -1,2 +1,2 @@
-# MyPractice
-Challenges and problem to be sovled.
+# Ghodrat Palyground
+Challenges and problem to be solved.
