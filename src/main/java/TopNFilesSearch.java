@@ -68,9 +68,9 @@ public class TopNFilesSearch {
 
     public static void main(String[] args) throws IOException {
         TopNFilesSearch searchTopN = new TopNFilesSearch();
-        File[] topNLargestFiles = searchTopN.topNLargestFiles(new File("/Users/gnaderi/Downloads"), 10);
+        File[] topNLargestFiles = searchTopN.topNLargestFiles(new File("/Users/gnaderi/Downloads"), 3);
         for (File file : topNLargestFiles) {
-            System.out.println(file.getName() + "=" + Files.size(Paths.get(file.getPath())));
+            System.out.println(file.getName() + "=" + (Files.size(Paths.get(file.getPath()))/(int)Math.pow(2,20))+"MB");
         }
     }
 }

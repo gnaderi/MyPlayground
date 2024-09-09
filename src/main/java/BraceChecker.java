@@ -6,10 +6,10 @@ import java.util.Stack;
 public class BraceChecker {
     public static void main(String[] args) {
         BraceChecker braceChecker = new BraceChecker();
-      System.out.println("true = " +braceChecker.isValid("(){}[]"));
-      System.out.println("true = " +braceChecker.isValid("([{}])"));
-      System.out.println("false = " +braceChecker.isValid("(}"));
-      System.out.println("false = " +braceChecker.isValid("[(])"));
+        System.out.println("true = " + braceChecker.isValid("(){}[]"));
+        System.out.println("true = " + braceChecker.isValid("([{}])"));
+        System.out.println("false = " + braceChecker.isValid("(}"));
+        System.out.println("false = " + braceChecker.isValid("[(])"));
     }
 
     public boolean isValid(String braces) {
@@ -23,19 +23,14 @@ public class BraceChecker {
                 } else {
                     Character pop = stack.pop();
                     char closeBrace = braces.charAt(i);
-                    switch (pop) {
-                        case '{':
-                          valid = valid && closeBrace == '}';
-                          break;
-                        case '[':
-                          valid = valid && closeBrace == ']';
-                          break;
-                        case '(':
-                          valid = valid && closeBrace == ')';
-                          break;
-                    }
-                    if (!valid){
-                      return false;
+                    valid = switch (pop) {
+                        case '{' -> closeBrace == '}';
+                        case '[' -> closeBrace == ']';
+                        case '(' -> closeBrace == ')';
+                        default -> true;
+                    };
+                    if (!valid) {
+                        return false;
                     }
                 }
 

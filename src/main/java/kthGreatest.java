@@ -1,11 +1,9 @@
-import java.util.concurrent.ConcurrentHashMap;
-
 public class kthGreatest {
 
     public static void main(String[] args) {
-        int a[] = {1, 5, 15, 20,26,36,50};
-        int b[] = {3, 6, 16, 17,35,39};
-        int k =3;
+        int[] a = {1, 5, 15, 20, 26, 36, 50};
+        int[] b = {3, 6, 16, 17, 35, 39};
+        int k = 3;
         int result = kthGreatest(a, b, k);
         System.out.println("result = " + result);
     }
@@ -25,6 +23,6 @@ public class kthGreatest {
                 bi++;
             }
         }
-        return a[al - ai] >= b[bl - bi] ? a[al - ai] : b[bl - bi];
+        return Math.max(a[al - ai], b[bl - bi]);
     }
 }

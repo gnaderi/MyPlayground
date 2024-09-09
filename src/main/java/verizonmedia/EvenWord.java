@@ -5,7 +5,9 @@ import java.util.Map;
 
 /*
 
-Given that an "even word" is a word in which each character appears an even number of times, write a function that takes in a string and returns the minimum number of letters to be removed to make that string an even word.
+Given that an "even word" is a word in which each character appears
+an even number of times, write a function that takes in a string and
+returns the minimum number of letters to be removed to make that string an even word.
 
 Example:
 evenWord('aaaa')
