@@ -1,10 +1,8 @@
 package r3;
 
 import java.io.IOException;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
+import java.util.LinkedList;
+import java.util.List;
 
 
 // Imagine you are a peer of the developer who committed this (syntactically correct) Java code and asked you to review
@@ -13,6 +11,15 @@ import java.util.stream.Collectors;
 //
 // Please use Java comments for your review feedback, putting them on separate lines around the code. Do not modify the
 // code itself.
+
+interface PersonDatabase<E> {
+
+    Person[] getAllPersons() throws IOException;
+    /*
+    It is better to use Optional<List<E>> Optional<Collection<E>> or at least a List<E> for return rather than an array.
+     */
+
+}
 
 public class CodeReviewExample {
     volatile Integer totalAge = 0;
@@ -93,13 +100,12 @@ public class CodeReviewExample {
 
 }
 
-
 class Person {
 
+    String gender;//Missing access level
     private int age;
     private String firstName;
     private String lastName;
-    String gender;//Missing access level
     // private String gender;
 
     public Person(int age, String firstName, String lastName) {
@@ -133,16 +139,6 @@ class Person {
 
     }
 
-
-}
-
-
-interface PersonDatabase<E> {
-
-    Person[] getAllPersons() throws IOException;
-    /*
-    It is better to use Optional<List<E>> Optional<Collection<E>> or at least a List<E> for return rather than an array.
-     */
 
 }
 
