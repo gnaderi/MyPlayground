@@ -12,8 +12,7 @@ public class GenderRatio {
                 boys += 1;
             }
         }
-        int[] genders = {girls, boys};
-        return genders;
+        return new int[]{girls, boys};
     }
 
     public static double runNFamilies(int n) {
@@ -24,12 +23,12 @@ public class GenderRatio {
             girls += genders[0];
             boys += genders[1];
         }
-        return girls / (double) (boys + girls);
+        return girls / (double) boys;
     }
 
     public static void main(String[] args) {
-        double ratio = runNFamilies(1000000000);
-        System.out.println("Male/Female ratio: "+ratio);
+        double ratio = runNFamilies(10000000);
+        System.out.println("Female/Male ratio: " + ratio);
     }
 
 }
